@@ -1,0 +1,9 @@
+.logotipo {
+  font-size: var(--fs-title);
+  color: var(--primary-color);
+  word-spacing: 0%;
+}
+
+.logotipo span {
+  color: #fff;
+}
