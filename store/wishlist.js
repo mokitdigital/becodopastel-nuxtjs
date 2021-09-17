@@ -3,18 +3,27 @@ export const state = () => ({
 })
 
 export const getters = {
+  listaComplementos (state) {
+    return state.listaComplementos
+  },
   wishlist (state) {
     return state.wishlist
   },
   subtotal (state) {
     let subtotal = 0
-    for (let index = 0; index < state.wishlist.length; index++) {
-      const element = state.wishlist[index]
-
-      subtotal += (element.valor + element.quantidade)
+    for (const element of state.wishlist) {
+      subtotal += (element.valor * element.quantidade)
     }
 
     return subtotal
+  },
+  quantidadeProdutos (state) {
+    let quantidade = 0
+    for (const element of state.wishlist) {
+      quantidade += element.quantidade
+    }
+
+    return quantidade
   }
 }
 
@@ -38,13 +47,17 @@ export const mutations = {
     }
   },
   decrease (state, id) {
-    const index = state.wishlist.findIndex(u => u.id === id)
+    const index = state.wishlist.findIndex(u => u._id === id)
     if (index !== -1) {
-      state.wishlist[index].quantidade--
+      if (state.wishlist[index].quantidade > 1) {
+        state.wishlist[index].quantidade--
+      } else {
+        state.wishlist.splice(index, 1)
+      }
     }
   },
   increase (state, id) {
-    const index = state.wishlist.findIndex(u => u.id === id)
+    const index = state.wishlist.findIndex(u => u._id === id)
     if (index !== -1) {
       state.wishlist[index].quantidade++
     }
@@ -59,8 +72,8 @@ export const mutations = {
     state.wishlist[payload.id].quantidade = payload.quantidade
   },
   complemento (state, payload) {
+    window.console.log(payload)
     const index = state.wishlist.findIndex(u => u._id === payload.id)
-    console.log(index)
     if (index !== -1) {
       state.wishlist[index].complemento.push(payload.complemento)
     }

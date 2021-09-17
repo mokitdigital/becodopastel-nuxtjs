@@ -1,0 +1,21 @@
+#user h2 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-block: 2rem;
+}
+
+#user p {
+  font-size: 0.7rem;
+}
+
+#user .options {
+  border-block: 1px solid rgb(230, 230, 230);
+  padding: 1.5rem;
+  display: flex;
+  cursor: pointer;
+}
+
+#user .options h3 {
+  font-size: 0.9rem;
+  margin-left: 1rem;
+}

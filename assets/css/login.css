@@ -1,0 +1,39 @@
+.sign-up {
+  background-color: var(--primary-color);
+  padding: 2rem;
+}
+
+.sign-up h1 {
+  font-size: 2rem;
+}
+
+.sign-up p {
+  font-size: 0.6rem;
+}
+
+.sign-in {
+  padding: 2rem;
+}
+
+.sign-in .social-container {
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  width: 10rem;
+
+}
+
+.sign-in .social-container .social-facebook {
+  font-size: 2rem;
+  color: blue;
+}
+
+.sign-in .social-container .social-google {
+  font-size: 2rem;
+  color: red;
+}
+
+.sign-in .social-container .social-facebook:hover,
+.sign-in .social-container .social-google:hover {
+  color: var(--secondary-color);
+}

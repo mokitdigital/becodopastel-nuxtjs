@@ -1,9 +1,15 @@
 .logotipo {
-  font-size: var(--fs-title);
+  font-size: 1.5rem;
   color: var(--primary-color);
   word-spacing: 0%;
 }
 
 .logotipo span {
   color: #fff;
+}
+
+@media screen and (min-width: 796px) {
+  .logotipo {
+    font-size: var(--fs-title);
+  }
 }

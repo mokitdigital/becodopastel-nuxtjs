@@ -18,6 +18,12 @@ export default {
   css: [
     '~/assets/css/main.css',
     '~/assets/css/navigation.css',
+    '~/assets/css/login.css',
+    '~/assets/css/modal.css',
+    '~/assets/css/user.css',
+    '~/assets/css/sacola.css',
+    '~/assets/css/footer.css',
+    '~/assets/css/card.css',
     '~/assets/css/home.css'
   ],
 
@@ -26,7 +32,9 @@ export default {
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
-  components: true,
+  components: [
+    '~/components'
+  ],
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
@@ -44,6 +52,7 @@ export default {
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
     '@nuxtjs/style-resources',
+    'nuxt-sweetalert2'
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios

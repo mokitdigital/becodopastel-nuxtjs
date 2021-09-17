@@ -1,0 +1,7 @@
+footer .nuxtlink {
+  color: #f5f5f5 !important;
+  text-decoration: underline;
+}
+footer h2 {
+  font-size: 1.3rem;
+}
