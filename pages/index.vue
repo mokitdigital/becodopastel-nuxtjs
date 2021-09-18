@@ -20,8 +20,7 @@ export default {
     return {
       logo,
       FotoPedido,
-      FotoMenu,
-      token: 'abc'
+      FotoMenu
     }
   },
   computed: {

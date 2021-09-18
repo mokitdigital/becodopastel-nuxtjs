@@ -4,19 +4,7 @@
       <NuxtLink to="/" class="logotipo"> Beco do <span>Pastel</span> </NuxtLink>
 
       <b-navbar-nav class="ml-auto d-flex flex-row">
-        <b-button
-          v-if="!token"
-          v-b-modal.login
-          variant="warning"
-          class="btn-entrar"
-          pill
-          size="lg"
-        >
-          Entrar
-        </b-button>
-
         <b-avatar
-          v-if="token"
           v-b-toggle.user
           badge="☰"
           badge-variant="warning"
@@ -26,7 +14,6 @@
         </b-avatar>
 
         <b-avatar
-          v-if="token"
           v-b-toggle.sacola
           :badge="String(wishlist.length)"
           badge-variant="warning"
@@ -83,11 +70,6 @@
 import { faUserAlt } from '@fortawesome/free-solid-svg-icons'
 import {  mapGetters } from 'vuex'
 export default {
-  data() {
-    return {
-      token: false,
-    }
-  },
   computed: {
     ...mapGetters({
       wishlist: 'wishlist/wishlist'
@@ -97,7 +79,7 @@ export default {
     },
   },
   mounted() {
-    this.verifyToken()
+    // this.verifyToken()
   },
   methods: {
     scrollBehavior () {
@@ -109,13 +91,11 @@ export default {
     },
     async verifyToken() {
       const response = await this.$axios.get(`http://localhost:5000/api/token?token=${localStorage.getItem('token')}`)
-      window.console.log('Passou pelo default')
+      window.console.log('Passou pelo modos', response)
       if(response.data.isToken) {
-        this.token = false
         this.$nuxt.$options.router.push('/')
       } else {
         this.$nuxt.$options.router.push('/dashboard')
-        this.token = true
       }
     }
   },

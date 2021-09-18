@@ -5,10 +5,10 @@
         <b-col class="center">
           <b-avatar src="https://placekitten.com/300/300" size="6rem"></b-avatar>
           <h2 class="name-user">
-            Luan Medeiros Silveira
+            {{ perfil.nomeCompleto }}
           </h2>
-          <p>luanmedeirossilveira@gmail.com</p>
-          <p>+55 51 99339-4478 </p>
+          <p>{{ perfil.email }}</p>
+          <p>+55 {{ perfil.celular }} </p>
           <NuxtLink to="/perfil" class="my-2">
             Alterar meus dados
           </NuxtLink>
@@ -34,7 +34,7 @@
       </b-row>
     </b-container>
     <template #footer>
-      <div class="d-flex align-items-center options">
+      <div class="d-flex align-items-center options" @click="logout()">
         <Font-awesome-icon :icon="faSignOutAlt"></Font-awesome-icon>
         <h3 class="my-0 mr-2">Sair</h3>
       </div>
@@ -45,6 +45,11 @@
 <script>
 import { faFileAlt, faTicketAlt, faQuestionCircle, faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
 export default {
+  data () {
+    return {
+      perfil: {}
+    }
+  },
   computed: {
     faFileAlt () {
       return faFileAlt
@@ -57,6 +62,20 @@ export default {
     },
     faTicketAlt () {
       return faTicketAlt
+    }
+  },
+  mounted () {
+    this.findPerfil()
+  },
+  methods: {
+    async findPerfil () {
+      const response = await this.$axios.get(`http://localhost:5000/api/perfils?token=${localStorage.getItem('token')}`)
+
+      this.perfil = response.data
+    },
+    logout() {
+      localStorage.removeItem('token')
+      this.$router.push('/')
     }
   }
 }

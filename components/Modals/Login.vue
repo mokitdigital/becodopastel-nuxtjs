@@ -14,12 +14,13 @@
               </a>
             </div>
             <span>ou use sua conta</span>
-            <b-form-input type="email" placeholder="E-mail" />
-            <b-form-input type="password" placeholder="Senha" />
+            <b-form-input v-model="form.email" type="email" placeholder="E-mail" />
+            <b-form-input v-model="form.password" type="password" placeholder="Senha" autocomplete="on" />
             <NuxtLink to="/forgot" class="my-2">
               Esqueceu sua senha?
             </NuxtLink>
             <b-button
+              type="submit"
               variant="warning"
               size="lg"
               pill
@@ -52,7 +53,7 @@ export default {
     return {
       form: {
         email: '',
-        name: ''
+        password: ''
       }
     }
   },
@@ -65,9 +66,21 @@ export default {
     }
   },
   methods: {
-    onSubmit(event) {
+    async onSubmit(event) {
       event.preventDefault()
-      alert(JSON.stringify(this.form))
+      
+      const login = await this.$axios.post("http://localhost:5000/api/login", this.form)
+
+      if(login.data.success) {
+        localStorage.removeItem('token')
+        
+        if(!localStorage.getItem('token')) {
+          localStorage.setItem('token', login.data.token)
+          if(localStorage.getItem('token')) {
+            this.$nuxt.$options.router.push('/dashboard')
+          }
+        }
+      }
     },
   },
 }

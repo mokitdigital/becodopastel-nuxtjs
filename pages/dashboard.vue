@@ -68,6 +68,7 @@ import { mapGetters } from 'vuex'
 // import { wishlistService } from '../../services'
 
 export default {
+  layout: 'modos',
   data() {
     return {
       itensLista: [],
@@ -75,7 +76,7 @@ export default {
       tipos: {
         tradicionais: [],
         especiais: [],
-      },
+      }
     }
   },
   computed: {
@@ -85,6 +86,7 @@ export default {
     })
   },
   mounted() {
+    this.verifyToken()
     this.findItens()
   },
   methods: {
@@ -107,6 +109,25 @@ export default {
     openComplemento() {
       this.$root.$emit('bv::show::modal', 'complemento')
     },
+    async verifyToken() {
+      const token = await this.$axios.get(`http://localhost:5000/api/token?token=${localStorage.getItem('token')}`)
+      if(token.isToken) {
+        this.$nuxt.$options.router.push('/')
+
+        this.$swal.fire({
+          icon: 'info',
+          text: 'Sessão inspirada!',
+          showClass: {
+            popup: 'animate__animated animate__fadeInDown',
+          },
+          hideClass: {
+            popup: 'animate__animated animate__fadeOutUp',
+          },
+        })
+
+        localStorage.removeItem('token')
+      }
+    }
   },
 }
 </script>

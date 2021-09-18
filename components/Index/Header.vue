@@ -46,22 +46,27 @@ export default {
       this.spinner = false
     },
     addItemSacola () {
-      for (const i of this.itens) {
-        if(i.nome === this.item) {
-          this.$store.dispatch('wishlist/setItem', i)
-          this.$swal.fire({
-            icon: 'success',
-            text: 'Item adicionado',
-            showClass: {
-              popup: 'animate__animated animate__fadeInDown',
-            },
-            hideClass: {
-              popup: 'animate__animated animate__fadeOutUp',
-            },
-          })
-          this.$nuxt.$options.router.push('/dashboard')
+      if(localStorage.getItem('token')) {
+        this.$nuxt.$options.router.push('/dashboard')
+          
+        for (const i of this.itens) {
+          if(i.nome === this.item) {
+            this.$store.dispatch('wishlist/setItem', i)
+            this.$swal.fire({
+              icon: 'success',
+              text: 'Item adicionado',
+              showClass: {
+                popup: 'animate__animated animate__fadeInDown',
+              },
+              hideClass: {
+                popup: 'animate__animated animate__fadeOutUp',
+              },
+            })
+            
+          }
         }
-      }
+      } else
+        this.$bvModal.show('login')
     },
     searchItem (item) {
       window.console.log(item)
