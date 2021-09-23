@@ -20,7 +20,7 @@
         <option v-for="(i, idx) in itens" :key="idx" :value="i.nome" />
       </datalist>
 
-      <img src="~/assets/images/pstl.png" alt="Pastel" class="img-home" />
+      <img src="https://i.ibb.co/xg3wp7v/pstl.png" alt="Pastel" class="img-home" />
     </b-col>
   </b-row>
 </template>
