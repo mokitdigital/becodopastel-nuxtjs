@@ -1,4 +1,9 @@
 export default {
+  // Build for public
+  generate: {
+    dir: 'public'
+  },
+
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'becodopastel',
